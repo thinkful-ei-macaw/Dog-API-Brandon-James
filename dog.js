@@ -8,9 +8,9 @@ function getDogImage() {
     .catch(error => alert('Something went wrong. Try again later.'));
 }
 
-function randomDogImg(dogs){
-  for(let i = 0; i < dogs.length; i++){
-
+function generateDog(num) {
+  for (let i = 1; i <= num; i++){
+    getDogImage();
   }
 }
 
@@ -28,7 +28,7 @@ function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
     const num = $('#num').val();
-    getDogImage();
+    generateDog(num);
   });
 }
 
