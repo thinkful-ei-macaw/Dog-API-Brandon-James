@@ -1,34 +1,35 @@
 'use strict';
 
-function getDogImage() {
-  fetch('https://dog.ceo/api/breeds/image/random')
+function getDogImage(num) {
+  fetch(`https://dog.ceo/api/breeds/image/random/${num}`)
     .then(response => response.json())
     .then(responseJson => 
-      displayResults(responseJson))
+      displayResults(responseJson, num))
     .catch(error => alert('Something went wrong. Try again later.'));
 }
 
-function generateDog(num) {
-  for (let i = 1; i <= num; i++){
-    getDogImage();
-  }
-}
-
-function displayResults(responseJson) {
+function displayResults(responseJson, num) {
   console.log(responseJson);
+  for(let i = 0; i < num; i++) {
+    const message = `${responseJson.message[i]}`;
+    $('.results').html($('.results').html() + generateImg(message));
+  }
   //replace the existing image with the new one
-  $('.results-img').replaceWith(
-    `<img src="${responseJson.message}" class="results-img">`
-  )
   //display the results section
   $('.results').removeClass('hidden');
 }
 
+function generateImg(mes) {
+  return `<img src="${mes}" class="results-img" alt="placeholder">
+          `;
+}
+
 function watchForm() {
   $('form').submit(event => {
+    $('.results').html("");
     event.preventDefault();
     const num = $('#num').val();
-    generateDog(num);
+    getDogImage(num);
   });
 }
 
