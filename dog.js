@@ -8,6 +8,12 @@ function getDogImage() {
     .catch(error => alert('Something went wrong. Try again later.'));
 }
 
+function randomDogImg(dogs){
+  for(let i = 0; i < dogs.length; i++){
+
+  }
+}
+
 function displayResults(responseJson) {
   console.log(responseJson);
   //replace the existing image with the new one
@@ -21,6 +27,7 @@ function displayResults(responseJson) {
 function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
+    const num = $('#num').val();
     getDogImage();
   });
 }
